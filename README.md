@@ -1,4 +1,3 @@
-<<<<<<<<<<<<<<  ✨ Codeium Command ⭐ >>>>>>>>>>>>>>>>
 # Ivory Grapes
 
 ## What is it?
@@ -21,5 +20,3 @@ The following features are included in Ivory Grapes:
 * Support for custom UI components
 * Support for custom CSS
 * Support for custom JavaScript
-
-<<<<<<<  84396cbc-2f3c-4cb2-a723-e24b1ee978b0  >>>>>>>
