@@ -2,9 +2,22 @@ body {
   margin: 0;
   font-weight: 300;
 }
+
+#root {
+  overflow: hidden;
+}
+
 h1,
 p {
   font-family: Lato;
+}
+
+.no-select {
+  user-select: none; /* Standard syntax */
+  -webkit-user-select: none; /* WebKit */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  -o-user-select: none; /* Opera */
 }
 
 .timeline-bar {
@@ -15,27 +28,53 @@ p {
   background: #463a3c;
   bottom: 0;
   width: 100%;
-  height: 80px;
+  height: 20%;
+  min-height: 80px;
   padding: 0px 5px 5px 5px;
-  z-index: 9999;
+  z-index: 1;
 }
 
 .timeline-header {
+  display: flex;
   font-weight: bold;
   text-align: center;
   color: #b9a5a6;
+  height: 60%;
+  justify-content: center;
 }
 
 .timeline-content {
   display: flex;
-  height: 100%;
-  border: 1px solid #b9a5a6;
+  height: -webkit-fill-available;
   position: relative;
+}
+
+.timeline-wrapper {
+  display: flex;
+  width: 100%;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.timeline-tracker:after {
+  content: "";
+  position: absolute;
+  background-color: rgb(255 0 0 / 62%);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.timeline-wrapper .timeline-section:nth-child(10n + 1) {
+  background-color: #d0cece66;
 }
 
 .timeline-section {
   flex: 1;
   border-right: 1px solid #b9a5a6;
+  border-top: 1px solid #b9a5a6;
+  border-bottom: 1px solid #b9a5a6;
   position: relative;
   display: flex;
   justify-content: center;
@@ -62,7 +101,14 @@ p {
 }
 
 .frame-selected {
-  padding: 0 4px;
+  /* padding: 0 4px; */
+}
+
+.frame-selected > span {
+  position: absolute;
+  top: -50%;
+  user-select: none;
+  pointer-events: none;
 }
 
 .frame-selected:after {
@@ -75,14 +121,213 @@ p {
   height: 100%;
 }
 
-
-
-
-
-.timeline-marker {
-  
-}
-
 .animation-panel {
   padding: 10px;
+}
+
+.anim-modal {
+  position: absolute;
+  background: black;
+  right: 0;
+}
+
+.anim-modal-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 7px;
+  justify-content: flex-end;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.anim-modal-section > label {
+  margin-right: auto;
+}
+
+.anim-modal.anim-closed {
+  top: -10px;
+  right: 10px;
+  width: max-content;
+  height: max-content;
+  border-radius: 50%;
+}
+
+.anim-modal.anim-open {
+  top: -400px;
+  right: 10px;
+  width: 300px;
+  height: fit-content;
+  border-radius: 15px;
+}
+
+.keyframe-editor {
+  position: absolute;
+  display: flex;
+  border: 2px solid red;
+  transition: width, height 0.2s ease-in-out;
+  user-select: none;
+  z-index: 5;
+}
+
+.keyframe-clear {
+  position: relative;
+  margin-top: auto;
+  margin-right: auto;
+  margin-left: auto;
+  pointer-events: all;
+  background: red;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 15px;
+}
+
+.handle {
+  position: absolute;
+}
+
+.scale,
+.translate {
+  width: 8px;
+  height: 8px;
+  pointer-events: all;
+  background: white;
+  border: 2px solid red;
+}
+
+.translate {
+  cursor: grab;
+  border-radius: 50%;
+}
+
+.rotate {
+  width: 24px;
+  height: 24px;
+  pointer-events: all;
+  border: orange solid 3px;
+  cursor: grab;
+  z-index: 6;
+}
+
+.translate.right {
+  right: -20px;
+  top: 50%;
+}
+
+.translate:after {
+  content: "";
+  position: absolute;
+  background-color: red;
+  z-index: -1;
+}
+
+.translate.right::after {
+  transform: translateY(50%);
+  left: -14px;
+  width: 17px;
+  height: 2px;
+}
+
+.translate.left::after {
+  transform: translateY(50%);
+  right: -14px;
+  width: 17px;
+  height: 2px;
+}
+
+.translate.top::after {
+  transform: translateX(50%);
+  top: 0px;
+  width: 2px;
+  height: 17px;
+}
+
+.translate.bottom::after {
+  transform: translateX(50%);
+  bottom: 0px;
+  width: 2px;
+  height: 17px;
+}
+
+.translate.left {
+  left: -20px;
+  top: 50%;
+}
+
+.translate.top {
+  top: -20px;
+  right: 50%;
+}
+
+.translate.bottom {
+  bottom: -20px;
+  right: 50%;
+}
+
+.rotate.top-right {
+  top: -12px;
+  right: -12px;
+}
+
+.rotate.bottom-right {
+  bottom: -12px;
+  right: -12px;
+}
+
+.rotate.bottom-left {
+  bottom: -12px;
+  left: -12px;
+}
+
+.rotate.top-left {
+  top: -12px;
+  left: -12px;
+}
+
+.scale.top-right {
+  top: -4px;
+  right: -4px;
+  cursor: nesw-resize;
+}
+
+.scale.bottom-right {
+  bottom: -4px;
+  right: -4px;
+  cursor: nwse-resize;
+}
+
+.scale.bottom-left {
+  bottom: -4px;
+  left: -4px;
+  cursor: nwse-resize;
+}
+
+.scale.top-left {
+  top: -4px;
+  left: -4px;
+  cursor: nesw-resize;
+}
+
+.scale.top {
+  top: -4px;
+  right: 50%;
+  cursor: ns-resize;
+}
+
+.scale.bottom {
+  bottom: -4px;
+  right: 50%;
+  cursor: ns-resize;
+}
+
+.scale.left {
+  left: -4px;
+  top: 50%;
+  cursor: ew-resize;
+}
+
+.scale.right {
+  right: -4px;
+  top: 50%;
+  cursor: ew-resize;
 }
