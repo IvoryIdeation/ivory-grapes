@@ -20,4 +20,7 @@ The following features are included in Ivory Grapes:
 * Support for custom UI components
 * Support for custom CSS
 * Support for custom JavaScript
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0c6d3c91a4390323cd4f6c1d77e29827b1fd31ae
